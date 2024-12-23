@@ -22,10 +22,10 @@ const Navbar = () => {
           <NavLink to="/">Home</NavLink>
         </li>
         <li>
-          <NavLink to="/">home</NavLink>
+          <NavLink to="/add-car">Add Car</NavLink>
         </li>
         <li>
-          <NavLink to="/add-car">Add Car</NavLink>
+          <NavLink to="/my-cars">My Cars</NavLink>
         </li>
       
       </>
@@ -105,3 +105,9 @@ const Navbar = () => {
   };
   
   export default Navbar;
+
+
+
+
+
+  

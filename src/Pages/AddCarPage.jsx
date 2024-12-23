@@ -1,14 +1,12 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 
 import axios from "axios";
-import MyDropzone from "../components/MyDropzone";
+import toast, { ToastBar } from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const AddCarPage = () => {
   const { user } = useContext(AuthContext);
-  const [image, setImage] = useState(null);
-
- 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,6 +19,7 @@ const AddCarPage = () => {
     const description = form.description.value;
     const availability = form.availability.value;
     const features = form.features.value.split("\n");
+    const image = form.image.value;
 
     const formData = {
       model,
@@ -32,27 +31,23 @@ const AddCarPage = () => {
       availability,
       image,
       features,
-      owner:{
+      owner: {
         email: user?.email,
         photo: user?.photoURL,
         name: user?.displayName,
       },
-      bookingCount:0
+      bookingCount: 0,
+      status: "Pending",
     };
-   
-    console.log(formData);
     try {
-      const { data } = await axios.post(
-        "http://localhost:5000/add-car",
-        formData
-      );
-      console.log(data);
+      await axios.post("http://localhost:5000/add-cars", formData);
+      // console.log(data);
+      Swal.success("Rent Car Added Successfully");
     } catch (error) {
-      console.error("Error uploading data:", error);
+      toast.error("Error uploading data:", error);
     }
   };
 
-  console.log(image);
   return (
     <div>
       <form onSubmit={handleSubmit} className="card-body">
@@ -75,8 +70,8 @@ const AddCarPage = () => {
             <span className="label-text">Vehicle Registration Number</span>
           </label>
           <input
-            type="number"
-            placeholder="text"
+            type="text"
+            placeholder="Vehicle Registration Number"
             name="registerNumber"
             className="input input-bordered"
             required
@@ -124,35 +119,17 @@ const AddCarPage = () => {
             required
           />
         </div>
-
-        {/* Car URL */}
-        <MyDropzone setImage={setImage}></MyDropzone>
-
-        {/* <div
-          {...getRootProps()}
-          style={{
-            border: "2px dashed #cccccc",
-            padding: "20px",
-            borderRadius: "10px",
-            cursor: "pointer",
-          }}
-        >
-          <input {...getInputProps()} className="input input-bordered" />
-
-          <p>Drag 'n' drop some files here, or click to select files</p>
-        </div> */}
-        {/* <div className="form-control">
-            <label className="label">
-              <span className="label-text">Let Upload Image </span>
-            </label>
-            <input
-              type="file"
-            
-              accept="image/*"
-              className="input pt-2"
-              
-            />
-          </div> */}
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Car Image Url </span>
+          </label>
+          <input
+            type="url"
+            name="image"
+            placeholder="photoUrl"
+            className="input input-bordered"
+          />
+        </div>
 
         {/* Owner Name */}
         <div className="form-control">
@@ -162,12 +139,14 @@ const AddCarPage = () => {
           <input
             type="text"
             placeholder="Owner Name"
+            defaultValue={user?.displayName}
             name="Owner_name"
+            disabled
             className="input input-bordered"
             required
           />
         </div>
-        {/* Hr Email */}
+        {/* owner Email */}
         <div className="form-control">
           <label className="label">
             <span className="label-text">Owner Email</span>
@@ -177,6 +156,7 @@ const AddCarPage = () => {
             placeholder="HR Email"
             name="Owner_email"
             defaultValue={user?.email}
+            disabled
             className="input input-bordered"
             required
           />
@@ -222,7 +202,6 @@ const AddCarPage = () => {
           <button className="btn btn-primary">Submit</button>
         </div>
       </form>
-      <img src={image} alt="" />
     </div>
   );
 };
