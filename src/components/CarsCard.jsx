@@ -46,7 +46,7 @@ const CarsCard = ({ car }) => {
         </p>
         <div className="divider"></div>
         <div className="card-actions ">
-          <button className="btn hover:bg-indigo-700 hover:text-white w-full">
+          <button className="btn bg-indigo-600 text-white hover:text-primary w-full">
             Book Now
           </button>
         </div>

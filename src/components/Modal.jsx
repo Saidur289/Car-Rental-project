@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import toast from "react-hot-toast";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const Modal = ({ id, closeModal, fetchData }) => {
   const [car, setCar] = useState({});
@@ -60,10 +61,11 @@ const Modal = ({ id, closeModal, fetchData }) => {
         formData
       );
       console.log("value of ", data);
-      if(data.modifiedCount>0) return  toast.success("Rent Car updated Successfully");
+      if(data.modifiedCount>0) return  Swal.fire("Rent Car updated Successfully");
      
       //   update
       fetchData();
+
       
     } catch (error) {
       toast.error("Error uploading data:", error);
@@ -242,12 +244,12 @@ const Modal = ({ id, closeModal, fetchData }) => {
           ></textarea>
         </div>
         <div className="flex flex-col  items-center justify-center mt-2">
-          <button type="submit" className="btn bg-indigo-700 text-white w-full">
+          <button  type="submit" className="btn bg-indigo-700 text-white w-full">
             Update
           </button>
           <button
             type="button"
-            className="mt-4 bg-red-500 text-white px-4 py-2 rounded"
+            className="mt-4 bg-red-500 text-white px-4 py-2 rounded w-full"
             onClick={closeModal}
           >
             Close Modal
