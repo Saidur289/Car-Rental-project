@@ -2,6 +2,7 @@ import { differenceInDays, format } from "date-fns";
 import { Fade } from "react-awesome-reveal";
 import { FaLocationDot, FaSackDollar } from "react-icons/fa6";
 import { MdUpdate } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const CarsCard = ({ car }) => {
   const { image, description, dailyPrice, model, location, datePosted, availability } =
@@ -46,9 +47,9 @@ const CarsCard = ({ car }) => {
         </p>
         <div className="divider"></div>
         <div className="card-actions ">
-          <button className="btn bg-indigo-600 text-white hover:text-primary w-full">
+         <Link className="w-full" to = {`/details/${car._id}`}> <button className="btn bg-indigo-600 text-white hover:text-primary w-full">
             Book Now
-          </button>
+          </button></Link>
         </div>
       </div>
     </div>

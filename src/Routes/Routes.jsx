@@ -8,6 +8,7 @@ import PrivateRoute from "./PrivateRoute";
 import MyCarsPage from "../Pages/MyCarsPage";
 import Modal from "../components/Modal";
 import AvailableCar from "../Pages/AvailableCar";
+import CarDetailsPage from "../Pages/CarDetailsPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: '/available',
         element:<AvailableCar></AvailableCar>
+      },
+      {
+        path: '/details/:id',
+        element: <PrivateRoute><CarDetailsPage></CarDetailsPage></PrivateRoute>
       }
     
     ],

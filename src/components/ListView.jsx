@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 
 const ListView = ({cars}) => {
@@ -51,11 +52,12 @@ const ListView = ({cars}) => {
                   </td>
                   <td>{car?.datePosted}</td>
                   <th>
+                    <Link to = {`/details/${car._id}`}>
                     <button
                       className="btn btn-ghost btn-xs  bg-indigo-600 text-white hover:text-primary"
                     >
                       Book Now
-                    </button>
+                    </button></Link>
 
                    
                   </th>
