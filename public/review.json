@@ -1,0 +1,33 @@
+[
+    {
+      "userName": "John Doe",
+      "profileImage": "https://randomuser.me/api/portraits/men/1.jpg",
+      "rating": 5,
+      "reviewText": "Amazing service! Highly recommended."
+    },
+    {
+      "userName": "Jane Smith",
+      "profileImage": "https://randomuser.me/api/portraits/women/2.jpg",
+      "rating": 4,
+      "reviewText": "Good experience, but there's room for improvement."
+    },
+    {
+      "userName": "Alice Johnson",
+      "profileImage": "https://randomuser.me/api/portraits/women/3.jpg",
+      "rating": 3,
+      "reviewText": "Average service, nothing exceptional."
+    },
+    {
+      "userName": "Mark Brown",
+      "profileImage": "https://randomuser.me/api/portraits/men/4.jpg",
+      "rating": 5,
+      "reviewText": "Excellent! I will definitely come back again."
+    },
+    {
+      "userName": "Emily Davis",
+      "profileImage": "https://randomuser.me/api/portraits/women/5.jpg",
+      "rating": 4,
+      "reviewText": "Very satisfied with the overall experience."
+    }
+  ]
+  
