@@ -1,10 +1,14 @@
 import { useContext, useState } from "react";
-import { AuthContext } from "../providers/AuthProvider";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { compareAsc } from "date-fns";
+import Swal from "sweetalert2";
 
-const Modals = ({ car, closeModal }) => {
-    const user = useContext(AuthContext)
+const Modals = ({ car, closeModal, user }) => {
+   
+    console.log(user.email);
     
   const {
     model,
@@ -16,6 +20,7 @@ const Modals = ({ car, closeModal }) => {
     features,
     owner,
     status,
+    image,
      _id
   } = car || {};
   const [startDate, setStartDate] = useState(new Date(datePosted));
@@ -23,40 +28,41 @@ const Modals = ({ car, closeModal }) => {
     e.preventDefault();
     const form = e.target;
     const model = form.model.value;
-    const registerNumber = form.registerNumber.value;
-    const location = form.location.value;
     const dailyPrice = form.dailyPrice.value;
-    const datePosted = form.datePosted.value;
-    const description = form.description.value;
+    const bookingDate = startDate
     const availability = form.availability.value;
-    const features = form.features.value.split("\n");
-    const image = form.image.value;
+
 
     const formData = {
       model,
-      registerNumber,
-      location,
       dailyPrice,
-      datePosted,
-      description,
-      availability,
+      bookingDate,
       image,
-      features,
+      status,
+      job_id: _id,
+      user_email: user?.email,
+      name: user?.name,
+      photo: user?.photoURL
     };
 
     console.table(formData);
     // console.table({id});
-
+     if(availability !== 'Available'){
+        return Swal.fire('This car is not available now')
+     }
+    //  date validation
+     if(compareAsc(new Date(), new Date(bookingDate)) === 1) {
+        return Swal.fire('You Cannot booking before posted date')
+     }
     try {
-      const { data } = await axios.put(
-        `http://localhost:5000/cars/${id}`,
+      const { data } = await axios.post(
+        `http://localhost:5000/add-booking`,
         formData
       );
       console.log("value of ", data);
-      if(data.modifiedCount>0) return  Swal.fire("Rent Car updated Successfully");
+      if(data.insertedId) return  Swal.fire(" Booking Successfully");
      
-      //   update
-      fetchData();
+    
 
       
     } catch (error) {
@@ -65,7 +71,7 @@ const Modals = ({ car, closeModal }) => {
   };
   return (
     <div className="absolute overflow-y-auto w-11/12 md:w-8/12 lg:w-6/12 lg:h-[90vh] z-50 top-6  left-1/2 transform -translate-x-1/2 bg-gray-600 bg-opacity-50 flex justify-center items-start  shadow-lg border-4">
-      <form className="w-full bg-white p-4 rounded shadow-2xl shadow-indigo-300 border z-50 ">
+      <form onSubmit={handleSubmit} className="w-full bg-white p-4 rounded shadow-2xl shadow-indigo-300 border z-50 ">
         <h1 className="text-xl text-center text-primary"> Booking Car Now </h1>
         {/* title */}
         <div className="form-control">
@@ -82,20 +88,7 @@ const Modals = ({ car, closeModal }) => {
           />
         </div>
         {/* location */}
-        <div className="md:flex gap-1">
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text"> Location</span>
-            </label>
-            <input
-              type="text"
-              name="location"
-              placeholder="Location"
-              defaultValue={location}
-              className="input input-bordered"
-              required
-            />
-          </div>
+        
           {/* Availability */}
           <div className="form-control">
             <label className="label">
@@ -113,7 +106,7 @@ const Modals = ({ car, closeModal }) => {
               </select>
             )}
           </div>
-        </div>
+        
         {/* Posted Price */}
 
         <div className="form-control">
@@ -167,31 +160,9 @@ const Modals = ({ car, closeModal }) => {
           </label>
           <DatePicker defaultValue ={datePosted} className="input input-bordered w-full" selected={startDate} onChange={(date) => setStartDate(date)} />
         </div>
-        {/* features */}
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Features</span>
-          </label>
-          <textarea
-            name="features"
-            className="textarea textarea-bordered"
-            defaultValue={features}
-            required
-            placeholder="Features In Different Line"
-          ></textarea>
-        </div>
-        {/* description */}
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Description</span>
-          </label>
-          <textarea
-            defaultValue={description}
-            name="description"
-            className="textarea textarea-bordered"
-            placeholder="Job Description"
-          ></textarea>
-        </div>
+       
+      
+     
         <div className="flex flex-col  items-center justify-center mt-2">
           <button type="submit" className="btn bg-indigo-700 text-white w-full">
             Update

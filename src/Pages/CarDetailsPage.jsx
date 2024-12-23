@@ -7,6 +7,7 @@ import Modals from "../CustomModal/Modals";
 
 const CarDetailsPage = () => {
     const {user} = useContext(AuthContext)
+    console.log(user.email);
     const [openModal, setModalOpen] = useState(false);
     const handleModalOpen = () => {
       setModalOpen(true);
@@ -93,7 +94,7 @@ const CarDetailsPage = () => {
         </button>
       </div>
       {
-        openModal && <Modals car = {car} closeModal = {closeModal}></Modals>
+        openModal && <Modals user = {user} car = {car} closeModal = {closeModal}></Modals>
       }
     </div>
     );
