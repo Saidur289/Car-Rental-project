@@ -6,7 +6,6 @@ import Register from "../Pages/Register";
 import AddCarPage from "../Pages/AddCarPage";
 import PrivateRoute from "./PrivateRoute";
 import MyCarsPage from "../Pages/MyCarsPage";
-import Modal from "../components/Modal";
 import AvailableCar from "../Pages/AvailableCar";
 import CarDetailsPage from "../Pages/CarDetailsPage";
 import MyBooking from "../Pages/MyBooking";

@@ -5,18 +5,19 @@ import { FaClock, FaTrash } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { format } from "date-fns";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const MyBooking = () => {
-  const axiosSecure = useAxiosSecure()
+  const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
+  const [startDate, setStartDate] = useState(new Date());
   const [cars, setCars] = useState([]);
   useEffect(() => {
     fetchData();
   }, [user]);
   const fetchData = async () => {
-    const { data } = await axiosSecure.get(
-      `/booking/${user.email}`
-    );
+    const { data } = await axiosSecure.get(`/booking/${user.email}`);
     setCars(data);
   };
   const handleUpdateCancel = async (id, prev, status) => {
@@ -58,6 +59,49 @@ const MyBooking = () => {
       </div>
     ));
   };
+  const handleDate = (id) => {
+    console.log(id);
+  };
+  // modal for update booking date
+  const handleModernDate = (id) => {
+   
+    toast((t) => (
+      <div className="flex flex-col space-y-1">
+        <div>
+          <h1>Update Booking Date</h1>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Posted Date And Time</span>
+            </label>
+            <DatePicker
+              minDate={new Date()}
+              defaultValue={startDate}
+              dateFormat="dd-MM-yyyy HH:mm"
+              className="input input-bordered w-full"
+              selected={startDate}
+              onChange={(date) => setStartDate(date)}
+            />
+          </div>
+        </div>
+        <div className="flex gap-1">
+          <button
+            onClick={() => {
+              toast.dismiss(t.id), handleDate(id);
+            }}
+            className="btn bg-red-500 text-white"
+          >
+            Yes
+          </button>
+          <button
+            onClick={() => toast.dismiss(t.id)}
+            className="btn bg-green-500 text-white"
+          >
+            No
+          </button>
+        </div>
+      </div>
+    ));
+  };
   {
     /* <button onClick={() => toast.dismiss(t.id)}>Dismiss</button> */
   }
@@ -70,7 +114,7 @@ const MyBooking = () => {
             <th className="text-left px-4 py-2">Car Image</th>
             <th className="text-left px-4 py-2">Car Model</th>
             <th className="text-left px-4 py-2">Daily Rent Price</th>
-            <th className="text-left px-4 py-2">Posted Date And Time</th>
+            <th className="text-left px-4 py-2">Booking Date And Time</th>
             <th className="text-left px-4 py-2">Status</th>
             <th className="text-left px-4 py-2">Action</th>
           </tr>
@@ -132,13 +176,15 @@ const MyBooking = () => {
                     }
                     className="btn btn-ghost btn-xs   text-xs text-red-500 bg-white"
                   >
-                    <FaTrash className="hidden md:block" /> Cancel
+                    <FaTrash className="hidden md:block" /> Cancel Booking
                   </button>
                   <button
                     title="Update Booking Date"
+                    onClick={() => handleModernDate(car?._id)}
                     className="btn btn-xs   text-xs text-indigo-600 bg-white ml-2"
                   >
-                    <FaClock className="hidden md:block" /> Modify
+                    <FaClock className="hidden md:block" />
+                    Modify Date
                   </button>
                 </td>
               </tr>

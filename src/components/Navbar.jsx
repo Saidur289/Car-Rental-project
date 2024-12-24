@@ -1,12 +1,12 @@
 import { useContext } from "react";
-import { AuthContext } from "../providers/AuthProvider";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/images/icons8-car-50.png";
 import { Tooltip } from "react-tooltip";
 import { FaUser } from "react-icons/fa";
+import { AuthContext } from "../providers/AuthProvider";
 
 const Navbar = () => {
-  const { handleSignOut, user } = useContext(AuthContext);
+  const { handleSignOut, user } = useContext(AuthContext)
   const navigate = useNavigate();
   const location = useLocation();
   const handleLogOut = () => {
@@ -77,38 +77,44 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end z-10">
-        {user && user?.email ? (
-          <div className="flex gap-1 items-center ">
-            <a
-              data-tooltip-id="tooltip-anchor-show"
-              data-tooltip-content={user?.displayName || "User"}
-              data-tooltip-delay-show={1000}
-            >
-              {user?.photoURL ? (
-                <img
-                  referrerPolicy="no-referrer"
-                  src={user?.photoURL}
-                  className="w-10 rounded-full"
-                />
-              ) : (
-                <FaUser className="w-10  rounded-full" />
-              )}
-            </a>
-            <Tooltip id="tooltip-anchor-show" />{" "}
-            <button
-              onClick={handleLogOut}
-              className="btn bg-gradient-to-r from-blue-700 to-purple-800 text-white"
-            >
-              Log Out
-            </button>
-          </div>
+  {user && user?.email ? (
+    <div className="flex gap-2 items-center">
+      {/* Profile Picture or Default Icon */}
+      <a
+        data-tooltip-id="tooltip-anchor-show"
+        data-tooltip-content={user?.displayName || "User"}
+        data-tooltip-delay-show={500}
+      >
+        {user?.photoURL ? (
+          <img
+            referrerPolicy="no-referrer"
+            src={user?.photoURL}
+            className="w-10 h-10 rounded-full"
+            alt={`${user?.displayName || "User"}'s profile`}
+          />
         ) : (
-          <Link to="/login">
-            {" "}
-            <button className="btn bg-indigo-400">Login </button>
-          </Link>
+          <FaUser className="w-10 h-10 rounded-full text-gray-500" />
         )}
-      </div>
+      </a>
+      <Tooltip id="tooltip-anchor-show" place="bottom" />{" "}
+      
+      {/* Log Out Button */}
+      <button
+        onClick={handleLogOut}
+        className="btn bg-gradient-to-r from-blue-700 to-purple-800 text-white hover:from-blue-500 hover:to-purple-600"
+      >
+        Log Out
+      </button>
+    </div>
+  ) : (
+    <Link to="/login">
+      <button className="btn bg-indigo-400 hover:bg-indigo-500 text-white">
+        Login
+      </button>
+    </Link>
+  )}
+</div>
+
     </div>
   );
 };

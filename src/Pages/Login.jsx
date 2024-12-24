@@ -10,6 +10,8 @@ const Login = () => {
    const {handleSingIn, handleLoginGoogle} = useContext(AuthContext)
    const navigate = useNavigate()
    const location = useLocation()
+   const from = location.state || '/'
+   console.log(from);
    // function for login 
    const handleLogin = e => {
     e.preventDefault()
@@ -19,17 +21,9 @@ const Login = () => {
     
     handleSingIn(email, password)
     .then((result) => {
-      setUser(result.user)
       e.target.reset()
-      Swal.fire({
-        position: "top-center",
-        icon: "success",
-        title: "'user successfully sign in'",
-        showConfirmButton: false,
-        timer: 1000,
-        
-      });
-      navigate(location?.state? location.state : '/')
+      toast('user sign in successfully')
+      navigate(from)
     })
     .catch((error) => {
       toast.error(error.message)
@@ -40,9 +34,9 @@ const Login = () => {
    const handleGoogle = () => {
     handleLoginGoogle()
     .then((result) => {
-      setUser(result.user)
-      Swal.fire('user successfully sign in')
-      navigate(location?.state? location.state : '/')
+      console.log('login successfully');
+      toast('user successfully sign in')
+      navigate(from)
     })
     .catch((error) => {
       toast.error(error.message)
@@ -79,7 +73,7 @@ const Login = () => {
              
            </div>
            <div className="form-control mt-6">
-             <button className="bg-blue-600 hover:bg-blue-700 text-white text-sm py-3 rounded-lg transition duration-300">Login</button>
+             <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white text-sm py-3 rounded-lg transition duration-300">Login</button>
            </div>
          </form>
         

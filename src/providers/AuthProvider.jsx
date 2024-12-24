@@ -4,7 +4,7 @@ import { auth } from "../firebase/firebase.config";
 import axios from "axios";
 
 
-export const AuthContext = createContext()
+export const AuthContext = createContext(null)
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
@@ -34,6 +34,7 @@ const AuthProvider = ({children}) => {
             const {data} = await axios.post('http://localhost:5000/logout', {},  {withCredentials: true})
             console.log(data);
             setLoading(false)
+            setUser(null)
     
           }
           

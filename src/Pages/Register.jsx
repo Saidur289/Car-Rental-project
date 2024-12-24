@@ -2,12 +2,11 @@ import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
-import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 
 const Register = () => {
     const [show, setShow] = useState(false)
-    const { handleSignUp, setUser, updateUser, handleLoginGoogle}  = useContext(AuthContext)
+    const { handleSignUp, updateUser, handleLoginGoogle}  = useContext(AuthContext)
     const navigate = useNavigate()
     const location = useLocation()
     const handleSubmit = e => {
@@ -30,8 +29,7 @@ const Register = () => {
         }
         handleSignUp(email, password)
         .then((result) => {
-          setUser(result.user);
-          Swal.fire('user successfully sign in')
+          toast('sign in successfully')
           e.target.reset()
           const updatedData = {
             displayName: name,
@@ -54,14 +52,7 @@ const Register = () => {
     const handleGoogle = () => {
       handleLoginGoogle()
       .then((result) => {
-        setUser(result.user)
-        Swal.fire({
-          position: "top-center",
-          icon: "success",
-          title: "'user successfully sign in'",
-          showConfirmButton: false,
-          timer: 1500
-        });
+       toast('sing in successfully')
         navigate(location?.state? location.state : '/')
       })
       .catch((error) => {
@@ -129,7 +120,7 @@ const Register = () => {
           </form>
         
           <p className="p-3 text-center">Already Have an account? <Link className="text-red-500" to = '/login'>Login</Link></p>
-          <button onClick={handleLoginGoogle} className="flex items-center justify-center gap-3 mt-3 bg-blue-900 hover:bg-blue-700 text-white text-sm py-3 rounded-lg transition duration-300"><FaGoogle></FaGoogle> Sign Up With Google</button>
+          <button onClick={handleGoogle} className="flex items-center justify-center gap-3 mt-3 bg-blue-900 hover:bg-blue-700 text-white text-sm py-3 rounded-lg transition duration-300"><FaGoogle></FaGoogle> Sign Up With Google</button>
         </div>
       </div>
     );

@@ -7,15 +7,10 @@ import { Link } from "react-router-dom";
 const CarsCard = ({ car }) => {
   const { image, description, dailyPrice, model, location, datePosted, availability , bookingCount} =
     car || {};
-  // console.log(new Date())
-  // const date = format(new Date(), 'MM/dd/yyyy')
   const date = format(new Date(), "yyyy/MM/dd");
   console.log(date);
   console.log(datePosted);
   let result = differenceInDays(new Date(date), new Date(datePosted));
-  
-  console.log(result);
-  console.log(image)
   return (
     <Fade cascade>
       <div className="card card-compact bg-base-100  shadow-xl hover:scale-105 hover:shadow-md hover:shadow-indigo-400 overflow-hidden">

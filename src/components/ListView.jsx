@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import { Link } from "react-router-dom";
 
 
@@ -50,7 +51,7 @@ const ListView = ({cars}) => {
                       {car?.availability}
                     </p>
                   </td>
-                  <td>{car?.datePosted}</td>
+                  <td>{format(new Date(car?.datePosted), 'P')}</td>
                   <th>
                     <Link to = {`/details/${car._id}`}>
                     <button
