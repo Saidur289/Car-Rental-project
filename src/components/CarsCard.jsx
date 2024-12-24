@@ -5,7 +5,7 @@ import { MdUpdate } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 const CarsCard = ({ car }) => {
-  const { image, description, dailyPrice, model, location, datePosted, availability } =
+  const { image, description, dailyPrice, model, location, datePosted, availability , bookingCount} =
     car || {};
   // console.log(new Date())
   // const date = format(new Date(), 'MM/dd/yyyy')
@@ -44,6 +44,11 @@ const CarsCard = ({ car }) => {
           {" "}
           <MdUpdate />
           Date Posted: Added {result} days ago.
+        </p>
+        <p className="font-semibold flex items-center gap-1 text-xl">
+          {" "}
+          
+          Total Booking: {bookingCount} .
         </p>
         <div className="divider"></div>
         <div className="card-actions ">

@@ -66,7 +66,7 @@ const Modals = ({ car, closeModal, user }) => {
 
       
     } catch (error) {
-      toast.error("Error uploading data:", error);
+      Swal.fire("You Already Booking Car", error.massage);
     }
   };
   return (

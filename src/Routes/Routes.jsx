@@ -9,10 +9,13 @@ import MyCarsPage from "../Pages/MyCarsPage";
 import Modal from "../components/Modal";
 import AvailableCar from "../Pages/AvailableCar";
 import CarDetailsPage from "../Pages/CarDetailsPage";
+import MyBooking from "../Pages/MyBooking";
+import ErrorPage from "../Pages/ErrorPage";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout></Layout>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -45,7 +48,11 @@ const router = createBrowserRouter([
       {
         path: '/details/:id',
         element: <PrivateRoute><CarDetailsPage></CarDetailsPage></PrivateRoute>
-      }
+      },
+     {
+      path: '/my-booking',
+      element: <PrivateRoute><MyBooking></MyBooking></PrivateRoute>
+     }
     
     ],
   },

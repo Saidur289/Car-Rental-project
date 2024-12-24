@@ -32,6 +32,10 @@ const Navbar = () => {
       <li>
         <NavLink to="/my-cars">My Cars</NavLink>
       </li>
+      <li>
+        <NavLink to="/my-booking">My Booking</NavLink>
+      </li>
+
     </>
   );
   return (
@@ -61,7 +65,7 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl flex gap-1 items-center">
+        <a className="text-xl flex gap-1 items-center">
           <img src={logo} className="w-10" alt="" />
           RENT CAR{" "}
         </a>

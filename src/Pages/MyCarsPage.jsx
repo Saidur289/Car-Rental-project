@@ -101,7 +101,7 @@ const MyCarsPage = () => {
           </ul>
         </details>
         <details className="dropdown">
-          <summary className="btn m-1  bg-indigo-600 text-white hover:text-primary">
+          <summary className="btn m-1   text-primary">
             Sort By Price
           </summary>
           <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
@@ -113,8 +113,8 @@ const MyCarsPage = () => {
             </li>
             <li
               onClick={() => handleSortLowerPrice("asc")}
-              className="className="
-              hover:text-primary
+            className="text-primary"
+          
             >
               <a>Lower Price</a>
             </li>
