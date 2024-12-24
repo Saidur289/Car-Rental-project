@@ -6,6 +6,7 @@ import { AuthContext } from "../providers/AuthProvider";
 import Modal from "../components/Modal";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const MyCarsPage = () => {
   const { user } = useContext(AuthContext);
@@ -25,10 +26,12 @@ const MyCarsPage = () => {
     setPrice(price);
     console.log(price);
   };
+   //   function for sort by higher price
   const handleSortHigherPrice = (price) => {
     setPrice(price);
     console.log(price);
   };
+  // function for modal
   const [openModal, setModalOpen] = useState(false);
   const handleModalOpen = (id) => {
     setSelectedId(id);
@@ -39,6 +42,7 @@ const MyCarsPage = () => {
     setModalOpen(false);
   };
   const [cars, setCars] = useState([]);
+  // fetchData for show in ui 
   useEffect(() => {
     fetchData();
   }, [user, date, price]);
@@ -48,6 +52,7 @@ const MyCarsPage = () => {
     );
     setCars(data);
   };
+  // function for delete
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -73,7 +78,22 @@ const MyCarsPage = () => {
       }
     });
   };
-
+const handleChangeStatus = async (id, prev, status) => {
+  console.table(id, prev, status);
+  if(prev === 'Confirmed' || prev === 'Cancel'){
+    return console.log('error');
+  }
+  try{
+    const {data} = await axios.patch(`http://localhost:5000/booking-update-status/${id}`, {status})
+    console.log(data);
+    // update ui 
+    fetchData()
+    Swal.fire(`status updated successfully ${status}`)
+    }
+    catch(err){
+      toast.error(err.massage)
+    }
+}
   return (
     <div
       className={`container mx-auto ${
@@ -132,6 +152,7 @@ const MyCarsPage = () => {
               <th>Availability</th>
               <th>Posted Date</th>
               <th>Action</th>
+              <th>Update Status</th>
             </tr>
           </thead>
           <tbody>
@@ -184,6 +205,43 @@ const MyCarsPage = () => {
                       <FaTrash></FaTrash>
                     </button>
                   </th>
+                  <td>
+                   <div className="flex gap-1">
+                   <p className={`${car?.status === 'Pending'? 'text-yellow-500 bg-yellow-100/60' : ''} ${car?.status === 'Confirmed'? 'text-green-500 bg-green-100/60' : ''} ${car?.status === 'Cancel'? 'text-red-500 bg-red-100/60' : ''}`}>{car?.status}</p>
+                   <button disabled = {car?.status === 'Cancel' || car?.status === 'Confirmed'} title="Confirmed" onClick={() => handleChangeStatus(car?._id, car?.status, 'Confirmed')}  className='disabled:cursor-not-allowed text-gray-500 transition-colors duration-200   hover:text-red-500 focus:outline-none'>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 24 24'
+                strokeWidth='1.5'
+                stroke='currentColor'
+                className='w-5 h-5'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  d='m4.5 12.75 6 6 9-13.5'
+                />
+              </svg>
+            </button>
+            <button disabled = {car?.status === 'Confirmed'} title="Cancel"  onClick={() => handleChangeStatus(car?._id, car?.status, 'Cancel')}   className='disabled:cursor-not-allowed text-gray-500 transition-colors duration-200   hover:text-yellow-500 focus:outline-none'>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 24 24'
+                strokeWidth='1.5'
+                stroke='currentColor'
+                className='w-5 h-5'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  d='M18.364 18.364A9 9 0 0 0 5.636 5.636m12.728 12.728A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636'
+                />
+              </svg>
+            </button>
+                   </div>
+                  </td>
                 </tr>
               ))
             ) : (

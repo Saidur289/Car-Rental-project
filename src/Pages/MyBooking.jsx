@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../providers/AuthProvider';
+import { FaClock, FaTrash } from 'react-icons/fa';
 
 const MyBooking = () => {
     const {user} = useContext(AuthContext)
@@ -12,6 +13,30 @@ const MyBooking = () => {
         const {data} = await axios.get(`http://localhost:5000/booking/${user.email}`)
         setCars(data)
     }
+    const handleUpdateCancel = (id) => {
+
+    }
+    const handleModernBtn = (id) =>{
+      toast(
+        (t) => (
+          <div>
+            <div>
+              Are Sure You Want Cancel Booking?
+            </div>
+            <div>
+              <button className='btn bg-red-500 text-white'>Yes</button>
+              <button className='btn bg-green-500 text-white'>No</button>
+
+            </div>
+          </div>
+         
+            
+          
+        ));
+       
+      
+    }
+    {/* <button onClick={() => toast.dismiss(t.id)}>Dismiss</button> */}
     return (
         <div className="overflow-x-auto py-8">
         <table className="table">
@@ -30,7 +55,7 @@ const MyBooking = () => {
             {/* row 3 */}
             {cars && (
               cars.map((car) => (
-                <tr key={car._id}>
+                <tr key={car._id} className='hover'>
                   <td>
                     <div className="flex items-center gap-3">
                       <div className="avatar">
@@ -60,14 +85,19 @@ const MyBooking = () => {
                     </p>
                   </td>
                   
-                  <td><p className='text-purple-600 px-4 py-2  bg-purple-100/60 '>{car?.status}</p></td>
+                  <td><p className={`px-4 py-2 ${car?.status === 'Pending'? 'text-yellow-500 bg-yellow-100/60' : ''} ${car?.status === 'Confirmed'? 'text-green-500 bg-green-100/60' : ''} ${car?.status === 'Cancel'? 'text-red-500 bg-red-100/60' : ''}`}>{car?.status}</p></td>
                   <th>
                    
-                    <button
-                      className="btn btn-ghost btn-xs  bg-indigo-600 text-white hover:text-primary "
+                    <p title='Cancel the Booking'
+                      className="btn btn-ghost btn-xs flex text-xs items-center  text-red-500 bg-white "
                     >
-                      Book Now
-                    </button>
+                      <FaTrash></FaTrash> Cancel Book
+                    </p>
+                    <p title='Update Booking Date'
+                      className="btn  btn-xs text-xs flex items-center  text-indigo-600 bg-white "
+                    >
+                      <FaClock></FaClock> Modify Date
+                    </p>
 
                    
                   </th>
