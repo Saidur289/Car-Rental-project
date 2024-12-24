@@ -79,10 +79,6 @@ const MyCarsPage = () => {
     });
   };
 const handleChangeStatus = async (id, prev, status) => {
-  console.table(id, prev, status);
-  if(prev === 'Confirmed' || prev === 'Cancel'){
-    return console.log('error');
-  }
   try{
     const {data} = await axios.patch(`http://localhost:5000/booking-update-status/${id}`, {status})
     console.log(data);
@@ -153,6 +149,7 @@ const handleChangeStatus = async (id, prev, status) => {
               <th>Posted Date</th>
               <th>Action</th>
               <th>Update Status</th>
+              <th>Booking Count</th>
             </tr>
           </thead>
           <tbody>
@@ -207,8 +204,8 @@ const handleChangeStatus = async (id, prev, status) => {
                   </th>
                   <td>
                    <div className="flex gap-1">
-                   <p className={`${car?.status === 'Pending'? 'text-yellow-500 bg-yellow-100/60' : ''} ${car?.status === 'Confirmed'? 'text-green-500 bg-green-100/60' : ''} ${car?.status === 'Cancel'? 'text-red-500 bg-red-100/60' : ''}`}>{car?.status}</p>
-                   <button disabled = {car?.status === 'Cancel' || car?.status === 'Confirmed'} title="Confirmed" onClick={() => handleChangeStatus(car?._id, car?.status, 'Confirmed')}  className='disabled:cursor-not-allowed text-gray-500 transition-colors duration-200   hover:text-red-500 focus:outline-none'>
+                   <p className={`${car?.status === 'Pending'? 'text-yellow-500 bg-yellow-100/60' : ''} ${car?.status === 'Confirmed'? 'text-green-500 bg-green-100/60' : ''} ${car?.status === 'Canceled'? 'text-red-500 bg-red-100/60' : ''}`}>{car?.status}</p>
+                   <button disabled = {car?.status === 'Canceled' || car?.status === 'Confirmed' ||  car?.bookingCount === 0} title="Confirmed" onClick={() => handleChangeStatus(car?._id, car?.status, 'Confirmed')}  className='disabled:cursor-not-allowed text-gray-500 transition-colors duration-200   hover:text-red-500 focus:outline-none'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 fill='none'
@@ -224,7 +221,7 @@ const handleChangeStatus = async (id, prev, status) => {
                 />
               </svg>
             </button>
-            <button disabled = {car?.status === 'Confirmed'} title="Cancel"  onClick={() => handleChangeStatus(car?._id, car?.status, 'Cancel')}   className='disabled:cursor-not-allowed text-gray-500 transition-colors duration-200   hover:text-yellow-500 focus:outline-none'>
+            <button disabled = {car?.status === 'Confirmed' || car?.bookingCount === 0  || car?.status === 'Canceled'} title="Cancel"  onClick={() => handleChangeStatus(car?._id, car?.status, 'Canceled')}   className='disabled:cursor-not-allowed text-gray-500 transition-colors duration-200   hover:text-yellow-500 focus:outline-none'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 fill='none'
@@ -242,6 +239,7 @@ const handleChangeStatus = async (id, prev, status) => {
             </button>
                    </div>
                   </td>
+                  <td className="text-center">{car?.bookingCount}</td>
                 </tr>
               ))
             ) : (

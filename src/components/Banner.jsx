@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Banner = () => {
   return (
   <div className="min-h-screen">
@@ -8,7 +10,7 @@ const Banner = () => {
         <h1 className="text-center text-2xl md:text-5xl text-white  font-bold">
         Freedom to Drive, Without the Hassle.
         <div>
-        <button className="btn bg-transparent hover:text-black px-6 py-2 text-white  outline-none rounded-xxl">View Available Car</button>
+       <Link to = '/available'> <button className="btn bg-transparent hover:text-black px-6 py-2 text-white  outline-none rounded-xxl">View Available Car</button></Link>
         </div>
         </h1>
         
