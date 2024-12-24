@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
-import logo from "../assets/icons8-car-100.png";
+import logo from "../assets/images/icons8-car-50.png";
 import { Tooltip } from "react-tooltip";
 
 const Navbar = () => {
