@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import { FaCalendarCheck, FaDollarSign, FaListAlt } from "react-icons/fa";
 import Modals from "../CustomModal/Modals";
+import { format } from "date-fns";
 
 
 const CarDetailsPage = () => {
@@ -65,7 +66,7 @@ const CarDetailsPage = () => {
         </div>
         <div className="flex items-center mb-2">
           <FaCalendarCheck className="text-green-500 mr-2" />
-          <p className="text-lg font-semibold">Posted Date: {datePosted}</p>
+          <p className="text-lg font-semibold">Posted Date: {format(new Date(datePosted), 'P')}</p>
         </div>
 
         <div className="flex items-start mb-2">

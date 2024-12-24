@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../providers/AuthProvider';
 import { FaClock, FaTrash } from 'react-icons/fa';
 import toast from 'react-hot-toast';
+import { format } from 'date-fns';
 
 const MyBooking = () => {
     const {user} = useContext(AuthContext)
@@ -51,76 +52,7 @@ const MyBooking = () => {
     }
     {/* <button onClick={() => toast.dismiss(t.id)}>Dismiss</button> */}
     return (
-      //   <div className="overflow-x-auto py-8">
-      //   <table className="table">
-      //     {/* head */}
-      //     <thead>
-      //       <tr>
-      //         <th>Car Image</th>
-      //         <th>Car Model</th>
-      //         <th>Daily Rent Price</th>
-      //         <th>Posted Date</th>
-      //         <th>Status</th>
-      //         <th>Action</th>
-      //       </tr>
-      //     </thead>
-      //     <tbody>
-      //       {/* row 3 */}
-      //       {cars && (
-      //         cars.map((car) => (
-      //           <tr key={car._id} className='hover'>
-      //             <td>
-      //               <div className="flex items-center gap-3">
-      //                 <div className="avatar">
-      //                   <div className="mask mask-squircle h-12 w-12">
-      //                     <img src={car.image} alt="car photo" />
-      //                   </div>
-      //                 </div>
-      //                 <div>
-      //                   <div className="font-bold">{car.user?.name}</div>
-      //                   <div className="text-sm opacity-50">
-      //                   </div>
-      //                 </div>
-      //               </div>
-      //             </td>
-      //             <td className='font-bold text-primary'>{car.model}</td>
-      //             <td>${car?.dailyPrice}/day</td>
-
-      //             <td>
-      //               <p
-      //                 className={
-      //                   car?.availability === "Available"
-      //                     ? "text-green-600 bg-green-100/60 px-4 py-2 text-left rounded-xl"
-      //                     : "text-purple-600 bg-purple-100/60  px-4 py-2 text-left rounded-xl"
-      //                 }
-      //               >
-      //                 {car?.bookingDate}
-      //               </p>
-      //             </td>
-                  
-      //             <td><p className={`px-4 py-2 ${car?.status === 'Pending'? 'text-yellow-500 bg-yellow-100/60' : ''} ${car?.status === 'Confirmed'? 'text-green-500 bg-green-100/60' : ''} ${car?.status === 'Canceled'? 'text-red-500 bg-red-100/60' : ''}`}>{car?.status}</p></td>
-      //             <th>
-                   
-      //               <button title='Cancel the Booking' disabled ={car?.status === 'Pending' || car?.status === 'Canceled'}  onClick={() => handleModernBtn(car?.job_id, car?.status, 'Canceled')}
-      //                 className="btn btn-ghost btn-xs flex text-xs items-center  text-red-500 bg-white "
-      //               >
-      //                 <FaTrash></FaTrash> Cancel Book
-      //               </button>
-      //               <button title='Update Booking Date'
-      //                 className="btn  btn-xs text-xs flex items-center  text-indigo-600 bg-white "
-      //               >
-      //                 <FaClock></FaClock> Modify Date
-      //               </button>
-
-                   
-      //             </th>
-      //           </tr>
-      //         ))
-      //       ) 
-      //       }
-      //     </tbody>
-      //   </table>
-      // </div>
+     
       <div className="overflow-x-auto py-8">
   <table className="table w-full">
     {/* Table Head */}
@@ -129,7 +61,7 @@ const MyBooking = () => {
         <th className="text-left px-4 py-2">Car Image</th>
         <th className="text-left px-4 py-2">Car Model</th>
         <th className="text-left px-4 py-2">Daily Rent Price</th>
-        <th className="text-left px-4 py-2">Posted Date</th>
+        <th className="text-left px-4 py-2">Posted Date And Time</th>
         <th className="text-left px-4 py-2">Status</th>
         <th className="text-left px-4 py-2">Action</th>
       </tr>
@@ -160,7 +92,7 @@ const MyBooking = () => {
                     : "text-purple-600 bg-purple-100/60"
                 }`}
               >
-                {car?.bookingDate}
+                {format(new Date(car?.bookingDate), "dd-MM-yyyy HH:mm")}
               </p>
             </td>
             <td className="px-4 py-2">

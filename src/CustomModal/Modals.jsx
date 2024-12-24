@@ -69,7 +69,7 @@ const Modals = ({ car, closeModal, user }) => {
     }
   };
   return (
-    <div className="absolute overflow-y-auto w-11/12 md:w-8/12 lg:w-6/12 lg:h-[90vh] z-50 top-6  left-1/2 transform -translate-x-1/2 bg-gray-600 bg-opacity-50 flex justify-center items-start  shadow-lg border-4">
+    <div className="modal-action absolute overflow-y-auto w-11/12 md:w-8/12 lg:w-6/12 lg:h-[90vh] z-50 top-52  md:top-6  left-1/2 transform -translate-x-1/2 bg-gray-600 bg-opacity-50 flex justify-center items-start  shadow-2xl border-4">
       <form onSubmit={handleSubmit} className="w-full bg-white p-4 rounded shadow-2xl shadow-indigo-300 border z-50 ">
         <h1 className="text-xl text-center text-primary"> Booking Car Now </h1>
         {/* title */}
@@ -157,7 +157,7 @@ const Modals = ({ car, closeModal, user }) => {
           <label className="label">
             <span className="label-text">Posted Date</span>
           </label>
-          <DatePicker defaultValue ={datePosted} className="input input-bordered w-full" selected={startDate} onChange={(date) => setStartDate(date)} />
+          <DatePicker minDate={new Date()} defaultValue ={datePosted}  dateFormat="dd-MM-yyyy HH:mm" className="input input-bordered w-full" selected={startDate} onChange={(date) => setStartDate(date)} />
         </div>
        
       

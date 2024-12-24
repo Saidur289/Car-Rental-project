@@ -1,12 +1,14 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 
 import axios from "axios";
-import toast, { ToastBar } from "react-hot-toast";
 import Swal from "sweetalert2";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const AddCarPage = () => {
   const { user } = useContext(AuthContext);
+  const [startDate, setStartDate] = useState(new Date());
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,7 +17,7 @@ const AddCarPage = () => {
     const registerNumber = form.registerNumber.value;
     const location = form.location.value;
     const dailyPrice = form.dailyPrice.value;
-    const datePosted = form.datePosted.value;
+    const datePosted = startDate
     const description = form.description.value;
     const availability = form.availability.value;
     const features = form.features.value.split("\n");
@@ -42,9 +44,9 @@ const AddCarPage = () => {
     try {
       await axios.post("http://localhost:5000/add-cars", formData);
       // console.log(data);
-      Swal.success("Rent Car Added Successfully");
+      Swal.fire("Rent Car Added Successfully");
     } catch (error) {
-      toast.error("Error uploading data:", error);
+      Swal.error("Error uploading data:", error);
     }
   };
 
@@ -162,18 +164,12 @@ const AddCarPage = () => {
           />
         </div>
         {/* deadline*/}
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">Posted Date</span>
-          </label>
-          <input
-            type="date"
-            placeholder="Posted Date"
-            name="datePosted"
-            className="input input-bordered"
-            required
-          />
-        </div>
+       <div className="form-control">
+                 <label className="label">
+                   <span className="label-text">Posted Date And Time</span>
+                 </label>
+                 <DatePicker minDate={new Date()} disabled defaultValue = {startDate}  dateFormat="dd-MM-yyyy HH:mm" className="input input-bordered w-full" selected={startDate} onChange={(date) => setStartDate(date)} />
+               </div>
         {/* features */}
         <div className="form-control">
           <label className="label">

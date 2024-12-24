@@ -3,17 +3,12 @@ import { AuthContext } from "../providers/AuthProvider";
 import toast from "react-hot-toast";
 import axios from "axios";
 import Swal from "sweetalert2";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { format } from "date-fns";
 
 const Modal = ({ id, closeModal, fetchData }) => {
   const [car, setCar] = useState({});
-  useEffect(() => {
-    fetch(`http://localhost:5000/cars/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log(data);
-        setCar(data);
-      });
-  }, [id]);
   const {
     model,
     registerNumber,
@@ -25,6 +20,17 @@ const Modal = ({ id, closeModal, fetchData }) => {
     image,
     features,
   } = car || {};
+  const [startDate, setStartDate] = useState(new Date());
+ 
+  useEffect(() => {
+    fetch(`http://localhost:5000/cars/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        setCar(data);
+      });
+  }, [id]);
+
   const { user } = useContext(AuthContext);
   console.log(id);
   const handleSubmit = async (e) => {
@@ -34,7 +40,7 @@ const Modal = ({ id, closeModal, fetchData }) => {
     const registerNumber = form.registerNumber.value;
     const location = form.location.value;
     const dailyPrice = form.dailyPrice.value;
-    const datePosted = form.datePosted.value;
+    const datePosted = startDate;
     const description = form.description.value;
     const availability = form.availability.value;
     const features = form.features.value.split("\n");
@@ -61,18 +67,17 @@ const Modal = ({ id, closeModal, fetchData }) => {
         formData
       );
       console.log("value of ", data);
-      if(data.modifiedCount>0) return  Swal.fire("Rent Car updated Successfully");
-     
+      if (data.modifiedCount > 0)
+        return Swal.fire("Rent Car updated Successfully");
+
       //   update
       fetchData();
-
-      
     } catch (error) {
       toast.error("Error uploading data:", error);
     }
   };
   return (
-    <div className="absolute overflow-y-auto w-11/12 md:w-8/12 lg:w-6/12 lg:h-[90vh] z-50 top-6  left-1/2 transform -translate-x-1/2 bg-gray-600 bg-opacity-50 flex justify-center items-start  shadow-lg border-4">
+    <div className="absolute overflow-y-auto w-11/12 md:w-8/12 lg:w-6/12 lg:h-[90vh] z-50 top-4  left-1/2 transform -translate-x-1/2 bg-gray-600 bg-opacity-50 flex justify-center items-start  shadow-lg border-4">
       <form
         onSubmit={handleSubmit}
         className="w-full bg-white p-4 rounded shadow-2xl border z-50 "
@@ -207,17 +212,18 @@ const Modal = ({ id, closeModal, fetchData }) => {
         {/* deadline*/}
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Posted Date</span>
+            <span className="label-text">Booking Date</span>
           </label>
-          <input
-            type="date"
-            placeholder="Posted Date"
-            name="datePosted"
+          <DatePicker
             defaultValue={datePosted}
-            className="input input-bordered"
-            required
+            dateFormat="dd-MM-yyyy HH:mm"
+            className="input input-bordered w-full"
+            disabled
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
           />
         </div>
+
         {/* features */}
         <div className="form-control">
           <label className="label">
@@ -244,7 +250,7 @@ const Modal = ({ id, closeModal, fetchData }) => {
           ></textarea>
         </div>
         <div className="flex flex-col  items-center justify-center mt-2">
-          <button  type="submit" className="btn bg-indigo-700 text-white w-full">
+          <button type="submit" className="btn bg-indigo-700 text-white w-full">
             Update
           </button>
           <button

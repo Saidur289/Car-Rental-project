@@ -12,7 +12,8 @@ const CarsCard = ({ car }) => {
   const date = format(new Date(), "yyyy/MM/dd");
   console.log(date);
   console.log(datePosted);
-  const result = differenceInDays(new Date(date), new Date(datePosted));
+  let result = differenceInDays(new Date(date), new Date(datePosted));
+  
   console.log(result);
   console.log(image)
   return (
@@ -27,7 +28,7 @@ const CarsCard = ({ car }) => {
       </figure>
       <div className="card-body space-y-2 ">
         <h2 className="card-title text-primary text-2xl">{model}</h2>
-        <p className="text-secondary text-xl">{description}</p>
+        <p className="text-secondary text-xl">{description.substring(0, 80)}</p>
         <p className="font-semibold flex items-center gap-1 text-xl">
           <FaSackDollar />
           Daily Price:{dailyPrice}
@@ -43,7 +44,9 @@ const CarsCard = ({ car }) => {
         <p className="font-semibold flex items-center gap-1 text-xl">
           {" "}
           <MdUpdate />
-          Date Posted: Added {result} days ago.
+          {result === 0 ? "Date Posted: Added a few times ago." : `Date Posted: Added ${result} days ago.`}
+
+         
         </p>
         <p className="font-semibold flex items-center gap-1 text-xl">
           {" "}
