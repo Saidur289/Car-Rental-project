@@ -11,7 +11,7 @@ import "react-datepicker/dist/react-datepicker.css";
 const MyBooking = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
-  const [startDate, setStartDate] = useState(new Date());
+  const [startDate, setStartDate] = useState(null);
   const [cars, setCars] = useState([]);
   useEffect(() => {
     fetchData();
@@ -21,13 +21,11 @@ const MyBooking = () => {
     setCars(data);
   };
   const handleUpdateCancel = async (id, prev, status) => {
-    console.log(id, prev, status);
     try {
       const { data } = await axios.patch(
         `http://localhost:5000/booking-update-status/${id}`,
         { status }
       );
-      console.log(data);
       // update ui
       fetchData();
       toast.success(`status updated successfully ${status}`);
@@ -59,34 +57,52 @@ const MyBooking = () => {
       </div>
     ));
   };
-  const handleDate = (id) => {
-    console.log(id);
+  const handleDate = async(id, startDate) => {
+    console.log(id, startDate);
+    const { data } = await axios.patch(`http://localhost:5000/update-booking/${id}`, {startDate});
+    // update ui
+    console.log(data);
+    fetchData()
+    toast.success('Booking Date Updated Successfully')
   };
   // modal for update booking date
   const handleModernDate = (id) => {
-   
     toast((t) => (
+      
       <div className="flex flex-col space-y-1">
         <div>
-          <h1>Update Booking Date</h1>
+          <h1 className="text-primary text-center font-thin">Update Booking Date</h1>
           <div className="form-control">
             <label className="label">
               <span className="label-text">Posted Date And Time</span>
             </label>
             <DatePicker
-              minDate={new Date()}
-              defaultValue={startDate}
               dateFormat="dd-MM-yyyy HH:mm"
               className="input input-bordered w-full"
+              showTimeSelect
+              timeFormat="HH:mm"
+              timeIntervals={15}
+              placeholderText="Select Date and Time"
               selected={startDate}
-              onChange={(date) => setStartDate(date)}
+              onChange={(date) =>{
+                console.log(date);
+               setStartDate(date)}
+              }  
+              
             />
           </div>
         </div>
         <div className="flex gap-1">
           <button
             onClick={() => {
-              toast.dismiss(t.id), handleDate(id);
+              if(startDate){
+                handleDate(id, startDate),
+                toast.dismiss(t.id)
+              }
+              else{
+                toast.error('please select a date')
+              }
+              
             }}
             className="btn bg-red-500 text-white"
           >
@@ -176,7 +192,7 @@ const MyBooking = () => {
                     }
                     className="btn btn-ghost btn-xs   text-xs text-red-500 bg-white"
                   >
-                    <FaTrash className="hidden md:block" /> Cancel Booking
+                    <FaTrash className="hidden md:block" /> Cancel
                   </button>
                   <button
                     title="Update Booking Date"
@@ -184,7 +200,7 @@ const MyBooking = () => {
                     className="btn btn-xs   text-xs text-indigo-600 bg-white ml-2"
                   >
                     <FaClock className="hidden md:block" />
-                    Modify Date
+                    Modify 
                   </button>
                 </td>
               </tr>

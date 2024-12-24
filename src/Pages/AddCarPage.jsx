@@ -163,7 +163,7 @@ const AddCarPage = () => {
             required
           />
         </div>
-        {/* deadline*/}
+        {/* posted date*/}
        <div className="form-control">
                  <label className="label">
                    <span className="label-text">Posted Date And Time</span>
