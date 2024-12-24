@@ -8,8 +8,10 @@ import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { format } from "date-fns";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const MyCarsPage = () => {
+  const axiosSecure = useAxiosSecure()
   const { user } = useContext(AuthContext);
   const [selectedId, setSelectedId] = useState(null);
   const [date, setDate] = useState("");
@@ -48,8 +50,8 @@ const MyCarsPage = () => {
     fetchData();
   }, [user, date, price]);
   const fetchData = async () => {
-    const { data } = await axios.get(
-      `http://localhost:5000/my-cars/${user?.email}?sort=${date}&price=${price}`
+    const { data } = await axiosSecure.get(
+      `/my-cars/${user?.email}?sort=${date}&price=${price}`
     );
     setCars(data);
   };

@@ -3,6 +3,7 @@ import { AuthContext } from "../providers/AuthProvider";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/images/icons8-car-50.png";
 import { Tooltip } from "react-tooltip";
+import { FaUser } from "react-icons/fa";
 
 const Navbar = () => {
   const { handleSignOut, user } = useContext(AuthContext);
@@ -21,21 +22,23 @@ const Navbar = () => {
       <li>
         <NavLink to="/">Home</NavLink>
       </li>
-      
-        <li>
-          <NavLink to="/available">Available Cars</NavLink>
-        </li>
-       <li>
-       <NavLink to="/add-car">Add Car</NavLink>
-       </li>
-      
-      <li>
-        <NavLink to="/my-cars">My Cars</NavLink>
-      </li>
-      <li>
-        <NavLink to="/my-booking">My Booking</NavLink>
-      </li>
 
+      <li>
+        <NavLink to="/available">Available Cars</NavLink>
+      </li>
+      {user && (
+        <>
+          <li>
+            <NavLink to="/add-car">Add Car</NavLink>
+          </li>
+          <li>
+            <NavLink to="/my-cars">My Cars</NavLink>
+          </li>
+          <li>
+            <NavLink to="/my-booking">My Booking</NavLink>
+          </li>
+        </>
+      )}
     </>
   );
   return (

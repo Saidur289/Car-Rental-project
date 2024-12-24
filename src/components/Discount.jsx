@@ -4,7 +4,7 @@ import pic from "../assets/images/car-7.jpg";
 const Discount = () => {
   return (
     <div className="md:flex   md:h-[500px]">
-      <div className="p-10 md:w-1/2  flex flex-col items-center justify-center space-y-1 md:space-y-5 bg-bg-hero bg-no-repeat bg-cover hover:scale-105 animate-animation_left ease-in-out overflow-hidden">
+      <div className="p-10 md:w-1/2  overflow-x-hidden flex flex-col items-center justify-center space-y-1 md:space-y-5 bg-bg-hero bg-no-repeat bg-cover hover:scale-105 animate-animation_left ease-in-out overflow-hidden">
         <h2 className="text-xl md:text-4xl text-white text-center font-bold">
           Best Collection For Black Friday
         </h2>
