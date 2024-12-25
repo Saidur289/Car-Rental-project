@@ -14,7 +14,7 @@ const AvailableCar = () => {
     fetchData();
   }, [filter, price]);
   const fetchData = async () => {
-    const { data } = await axios.get(`http://localhost:5000/cars?search=${filter}&price=${price}`);
+    const { data } = await axios.get(`https://car-rental-server-alpha.vercel.app/cars?search=${filter}&price=${price}`);
     setCars(data);
   };
 // function for grid view 

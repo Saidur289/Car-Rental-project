@@ -21,7 +21,7 @@ const MyBooking = () => {
   const handleUpdateCancel = async (id, prev, status) => {
     try {
       const { data } = await axios.patch(
-        `http://localhost:5000/booking-update-status/${id}`,
+        `https://car-rental-server-alpha.vercel.app/booking-update-status/${id}`,
         { status }
       );
       // update ui

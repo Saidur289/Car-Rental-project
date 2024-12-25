@@ -11,7 +11,6 @@ const Login = () => {
    const navigate = useNavigate()
    const location = useLocation()
    const from = location.state || '/'
-   console.log(from);
    // function for login 
    const handleLogin = e => {
     e.preventDefault()
@@ -34,7 +33,6 @@ const Login = () => {
    const handleGoogle = () => {
     handleLoginGoogle()
     .then((result) => {
-      console.log('login successfully');
       toast('user successfully sign in')
       navigate(from)
     })

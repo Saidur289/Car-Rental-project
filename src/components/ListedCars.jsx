@@ -9,7 +9,7 @@ const ListedCars = () => {
         fetchData()
     }, [])
     const fetchData = async() => {
-        const {data} = await axios.get('http://localhost:5000/cars')
+        const {data} = await axios.get('https://car-rental-server-alpha.vercel.app/cars')
         setCars(data)
     }
     return (

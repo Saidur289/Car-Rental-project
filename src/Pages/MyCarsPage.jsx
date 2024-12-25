@@ -11,7 +11,7 @@ import { format } from "date-fns";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const MyCarsPage = () => {
-  const axiosSecure = useAxiosSecure()
+  const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
   const [selectedId, setSelectedId] = useState(null);
   const [date, setDate] = useState("");
@@ -27,12 +27,12 @@ const MyCarsPage = () => {
   //   function for sort by lower price
   const handleSortLowerPrice = (price) => {
     setPrice(price);
-    console.log(price);
+    // console.log(price);
   };
   //   function for sort by higher price
   const handleSortHigherPrice = (price) => {
     setPrice(price);
-    console.log(price);
+    // console.log(price);
   };
   // function for modal
   const [openModal, setModalOpen] = useState(false);
@@ -68,7 +68,7 @@ const MyCarsPage = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`http://localhost:5000/delete/${id}`);
+          await axios.delete(`https://car-rental-server-alpha.vercel.app/delete/${id}`);
           Swal.fire({
             title: "Deleted!",
             text: "Your file has been deleted.",
@@ -84,10 +84,10 @@ const MyCarsPage = () => {
   const handleChangeStatus = async (id, prev, status) => {
     try {
       const { data } = await axios.patch(
-        `http://localhost:5000/booking-update-status/${id}`,
+        `https://car-rental-server-alpha.vercel.app/booking-update-status/${id}`,
         { status }
       );
-      console.log(data);
+      // console.log(data);
       // update ui
       fetchData();
       Swal.fire(`status updated successfully ${status}`);
@@ -324,7 +324,7 @@ const MyCarsPage = () => {
             </tr>
           </thead>
           <tbody>
-            {cars ? (
+            {Array.isArray(cars) &&  cars.length > 0 ? (
               cars.map((car) => (
                 <tr key={car._id} className="text-sm md:text-base">
                   <td>
@@ -356,9 +356,7 @@ const MyCarsPage = () => {
                     </p>
                   </td>
                   <td>
-                    
-                    {car?.datePosted &&    format(new Date(car?.datePosted), "P")}
-                  
+                    {car?.datePosted && format(new Date(car?.datePosted), "P")}
                   </td>
                   <th>
                     <button

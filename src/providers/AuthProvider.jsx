@@ -25,12 +25,12 @@ const AuthProvider = ({children}) => {
         const unsubscribe = onAuthStateChanged(auth, async currentUser => {
         
           if(currentUser?.email){
-           await axios.post('http://localhost:5000/jwt', {email: currentUser?.email} , {withCredentials: true}) 
+           await axios.post('https://car-rental-server-alpha.vercel.app/jwt', {email: currentUser?.email} , {withCredentials: true}) 
            setUser(currentUser)
            setLoading(false)
           }
           else{
-             await axios.post('http://localhost:5000/logout', {},  {withCredentials: true})
+             await axios.post('https://car-rental-server-alpha.vercel.app/logout', {},  {withCredentials: true})
             setLoading(false)
             setUser(null)
     

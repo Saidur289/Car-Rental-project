@@ -18,7 +18,7 @@ const CarDetailsPage = () => {
      const [car, setCar] = useState({});
      const {id} = useParams()
       useEffect(() => {
-        fetch(`http://localhost:5000/cars/${id}`)
+        fetch(`https://car-rental-server-alpha.vercel.app/cars/${id}`)
           .then((res) => res.json())
           .then((data) => {
             // console.log(data);

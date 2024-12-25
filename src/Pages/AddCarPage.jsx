@@ -5,10 +5,12 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useNavigate } from "react-router-dom";
 
 const AddCarPage = () => {
   const { user } = useContext(AuthContext);
   const [startDate, setStartDate] = useState(new Date());
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,8 +44,9 @@ const AddCarPage = () => {
       status: "Pending",
     };
     try {
-      await axios.post("http://localhost:5000/add-cars", formData);
+      await axios.post("https://car-rental-server-alpha.vercel.app/add-cars", formData);
       // console.log(data);
+      navigate('/')
       Swal.fire("Rent Car Added Successfully");
     } catch (error) {
       Swal.error("Error uploading data:", error);

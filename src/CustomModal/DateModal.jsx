@@ -9,12 +9,12 @@ const DateModal = ({ closeModal, id, fetchData }) => {
   const handleDate = async () => {
     try {
       const { data } = await axios.patch(
-        `http://localhost:5000/update-booking/${id}`,
+        `https://car-rental-server-alpha.vercel.app/update-booking/${id}`,
         {
           bookingDate: startDate,
         }
       );
-      console.log(data);
+      // console.log(data);
       toast.success("booking date updated successfully");
       closeModal();
       fetchData();

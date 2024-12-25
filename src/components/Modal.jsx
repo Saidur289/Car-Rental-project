@@ -23,7 +23,7 @@ const Modal = ({ id, closeModal, fetchData }) => {
   const [startDate, setStartDate] = useState(new Date());
  
   useEffect(() => {
-    fetch(`http://localhost:5000/cars/${id}`)
+    fetch(`https://car-rental-server-alpha.vercel.app/cars/${id}`)
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);
@@ -57,18 +57,18 @@ const Modal = ({ id, closeModal, fetchData }) => {
       features,
     };
 
-    console.table(formData);
+   
     // console.table({id});
 
     try {
       const { data } = await axios.put(
-        `http://localhost:5000/cars/${id}`,
+        `https://car-rental-server-alpha.vercel.app/cars/${id}`,
         formData
       );
-      console.log("value of ", data);
+     
       if (data.modifiedCount > 0)
         return Swal.fire("Rent Car updated Successfully");
-
+      form.reset()
       //   update
       fetchData();
     } catch (error) {

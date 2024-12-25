@@ -5,10 +5,12 @@ import axios from "axios";
 import { compareAsc } from "date-fns";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Modals = ({ car, closeModal, user }) => {
+  const navigate = useNavigate()
    
-    console.log(user.email);
+   
     
   const {
     model,
@@ -59,11 +61,12 @@ const Modals = ({ car, closeModal, user }) => {
      }
     try {
       const { data } = await axios.post(
-        `http://localhost:5000/add-booking`,
+        `https://car-rental-server-alpha.vercel.app/add-booking`,
         formData
       );
       closeModal()
-      console.log("value of ", data);
+      form.reset()
+      navigate('/my-booking')
       if(data.insertedId) return  Swal.fire(" Booking Successfully");
      
       

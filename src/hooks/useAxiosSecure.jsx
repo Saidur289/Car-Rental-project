@@ -3,7 +3,7 @@ import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://car-rental-server-alpha.vercel.app",
   withCredentials: true,
 });
 const useAxiosSecure = () => {
