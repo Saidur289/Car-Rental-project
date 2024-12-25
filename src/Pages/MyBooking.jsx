@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { format } from "date-fns";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import DateModal from "../CustomModal/DateModal";
+import OurRevenue from "./OurRevenue";
 
 const MyBooking = () => {
   const axiosSecure = useAxiosSecure();
@@ -157,6 +158,7 @@ const MyBooking = () => {
           <DateModal id = {selectedId} closeModal = {closeModal} fetchData = {fetchData}></DateModal>
         )
       }
+      <OurRevenue cars = {cars}></OurRevenue>
     </div>
   );
 };

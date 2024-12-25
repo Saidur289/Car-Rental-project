@@ -1,14 +1,14 @@
 
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 
-const OurRevenue = () => {
-    const bookingRevenueData = [
-        { month: "January", revenue: 5000 },
-        { month: "February", revenue: 7500 },
-        { month: "March", revenue: 6200 },
-        { month: "April", revenue: 8300 },
-        { month: "May", revenue: 9100 },
-      ];
+const OurRevenue = ({cars}) => {
+    // const bookingRevenueData = [
+    //     { month: "January", revenue: 5000 },
+    //     { month: "February", revenue: 7500 },
+    //     { month: "March", revenue: 6200 },
+    //     { month: "April", revenue: 8300 },
+    //     { month: "May", revenue: 9100 },
+    //   ];
       
     
     return (
@@ -16,12 +16,12 @@ const OurRevenue = () => {
             <h1 className='text-primary text-3xl  text-center'>Trending Revenue</h1>
             <div style={{ width: '100%', height: 300 }}>
                 <ResponsiveContainer>
-                    <BarChart data={bookingRevenueData}>
+                    <BarChart data={cars}>
                         <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="month" />
+                        <XAxis dataKey="model" />
                         <YAxis />
                         <Tooltip />
-                        <Bar dataKey="revenue" fill="#8884d8" />
+                        <Bar dataKey="dailyPrice" fill="#8884d8" />
                     </BarChart>
                 </ResponsiveContainer>
             </div>
