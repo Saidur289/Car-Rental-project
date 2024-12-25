@@ -3,6 +3,7 @@ import Carousel from "../components/Carousel";
 import ChooseUs from "../components/ChooseUs";
 import Discount from "../components/Discount";
 import ListedCars from "../components/ListedCars";
+import OurRevenue from "./OurRevenue";
 
 
 const Home = () => {
@@ -13,6 +14,7 @@ const Home = () => {
           <ListedCars></ListedCars>
           <Carousel></Carousel>
          <Discount></Discount>
+         <OurRevenue></OurRevenue>
         </div>
     );
 };

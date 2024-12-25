@@ -26,7 +26,7 @@ const handleList = e => {
     e.preventDefault()
     setView(false)
 }
-console.log(price);
+
   return (
     <div>
       <div className="py-6 w-3/5 mx-auto flex flex-col space-y-5">

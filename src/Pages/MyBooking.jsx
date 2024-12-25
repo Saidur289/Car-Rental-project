@@ -5,13 +5,11 @@ import { FaClock, FaTrash } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { format } from "date-fns";
 import useAxiosSecure from "../hooks/useAxiosSecure";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import DateModal from "../CustomModal/DateModal";
 
 const MyBooking = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthContext);
-  const [startDate, setStartDate] = useState(null);
   const [cars, setCars] = useState([]);
   useEffect(() => {
     fetchData();
@@ -34,7 +32,6 @@ const MyBooking = () => {
     }
   };
   const handleModernBtn = (id, prev, status) => {
-    console.log(id, prev, status);
     toast((t) => (
       <div className="flex flex-col space-y-1">
         <div>Are Sure You Want Cancel Booking?</div>
@@ -57,66 +54,15 @@ const MyBooking = () => {
       </div>
     ));
   };
-  const handleDate = async(id, startDate) => {
-    console.log(id, startDate);
-    const { data } = await axios.patch(`http://localhost:5000/update-booking/${id}`, {startDate});
-    // update ui
-    console.log(data);
-    fetchData()
-    toast.success('Booking Date Updated Successfully')
-  };
+  const [selectedId, setSelectedId] = useState(null);
   // modal for update booking date
-  const handleModernDate = (id) => {
-    toast((t) => (
-      
-      <div className="flex flex-col space-y-1">
-        <div>
-          <h1 className="text-primary text-center font-thin">Update Booking Date</h1>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text">Posted Date And Time</span>
-            </label>
-            <DatePicker
-              dateFormat="dd-MM-yyyy HH:mm"
-              className="input input-bordered w-full"
-              showTimeSelect
-              timeFormat="HH:mm"
-              timeIntervals={15}
-              placeholderText="Select Date and Time"
-              selected={startDate}
-              onChange={(date) =>{
-                console.log(date);
-               setStartDate(date)}
-              }  
-              
-            />
-          </div>
-        </div>
-        <div className="flex gap-1">
-          <button
-            onClick={() => {
-              if(startDate){
-                handleDate(id, startDate),
-                toast.dismiss(t.id)
-              }
-              else{
-                toast.error('please select a date')
-              }
-              
-            }}
-            className="btn bg-red-500 text-white"
-          >
-            Yes
-          </button>
-          <button
-            onClick={() => toast.dismiss(t.id)}
-            className="btn bg-green-500 text-white"
-          >
-            No
-          </button>
-        </div>
-      </div>
-    ));
+  const [openModal, setModalOpen] = useState(false);
+  const handleModalOpen = (id) => {
+    setSelectedId(id)
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
   };
   {
     /* <button onClick={() => toast.dismiss(t.id)}>Dismiss</button> */
@@ -162,8 +108,7 @@ const MyBooking = () => {
                         ? "text-green-600 bg-green-100/60"
                         : "text-purple-600 bg-purple-100/60"
                     }`}
-                  >
-                    {format(new Date(car?.bookingDate), "dd-MM-yyyy HH:mm")}
+                  >                    {car?.bookingDate  && format(new Date(car?.bookingDate), 'dd-MM-yyyy HH:mm') } 
                   </p>
                 </td>
                 <td className="px-4 py-2">
@@ -196,7 +141,7 @@ const MyBooking = () => {
                   </button>
                   <button
                     title="Update Booking Date"
-                    onClick={() => handleModernDate(car?._id)}
+                    onClick={() => handleModalOpen(car?._id)}
                     className="btn btn-xs   text-xs text-indigo-600 bg-white ml-2"
                   >
                     <FaClock className="hidden md:block" />
@@ -207,6 +152,11 @@ const MyBooking = () => {
             ))}
         </tbody>
       </table>
+      {
+        openModal && (
+          <DateModal id = {selectedId} closeModal = {closeModal} fetchData = {fetchData}></DateModal>
+        )
+      }
     </div>
   );
 };

@@ -4,6 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import { compareAsc } from "date-fns";
 import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const Modals = ({ car, closeModal, user }) => {
    
@@ -44,7 +45,7 @@ const Modals = ({ car, closeModal, user }) => {
       photo: user?.photoURL
     };
 
-    console.table(formData);
+   
     // console.table({id});
      if(availability !== 'Available'){
         return Swal.fire('This car is not available now')
@@ -53,15 +54,19 @@ const Modals = ({ car, closeModal, user }) => {
      if(compareAsc(new Date(), new Date(bookingDate)) === 1) {
         return Swal.fire('You Cannot booking before posted date')
      }
+     if(owner?.email === user?.email){
+      return toast.error('Access Denied')
+     }
     try {
       const { data } = await axios.post(
         `http://localhost:5000/add-booking`,
         formData
       );
+      closeModal()
       console.log("value of ", data);
       if(data.insertedId) return  Swal.fire(" Booking Successfully");
      
-    
+      
 
       
     } catch (error) {
@@ -164,7 +169,7 @@ const Modals = ({ car, closeModal, user }) => {
      
         <div className="flex flex-col  items-center justify-center mt-2">
           <button type="submit" className="btn bg-indigo-700 text-white w-full">
-            Update
+            Booking
           </button>
           <button
             type="button"

@@ -32,7 +32,6 @@ const Modal = ({ id, closeModal, fetchData }) => {
   }, [id]);
 
   const { user } = useContext(AuthContext);
-  console.log(id);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
