@@ -32,6 +32,7 @@ const MyBooking = () => {
       toast.error(err.massage);
     }
   };
+  const result = cars.filter(car => car?.status === 'Confirmed').reduce((pre, car) => pre + parseFloat(car.dailyPrice || 0) * 1.1, 0).toFixed(2);
   const handleModernBtn = (id, prev, status) => {
     toast((t) => (
       <div className="flex flex-col space-y-1">
@@ -76,7 +77,7 @@ const MyBooking = () => {
           <tr>
             <th className="text-left px-4 py-2">Car Image</th>
             <th className="text-left px-4 py-2">Car Model</th>
-            <th className="text-left px-4 py-2">Daily Rent Price</th>
+            <th className="text-left px-4 py-2">Daily Rent Price With 10% Tax</th>
             <th className="text-left px-4 py-2">Booking Date And Time</th>
             <th className="text-left px-4 py-2">Status</th>
             <th className="text-left px-4 py-2">Action</th>
@@ -101,7 +102,8 @@ const MyBooking = () => {
                 <td className="px-4 py-2 font-bold text-primary">
                   {car.model}
                 </td>
-                <td className="px-4 py-2">${car?.dailyPrice}/day</td>
+                <td className="px-4 py-2">${(parseFloat(car?.dailyPrice || 0) * 1.1).toFixed(2)}
+                  /day  </td>
                 <td className="px-4 py-2">
                   <p
                     className={`rounded-xl px-4 py-2 text-sm ${
@@ -152,6 +154,13 @@ const MyBooking = () => {
               </tr>
             ))}
         </tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td></td>
+            <td className="text-sm text-primary font-bold text-left">Total Price After Confirmed:{result}</td>
+          </tr>
+        </tfoot>
       </table>
       {
         openModal && (

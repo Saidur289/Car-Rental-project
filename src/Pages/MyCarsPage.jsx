@@ -448,10 +448,11 @@ const MyCarsPage = () => {
               ))
             ) : (
               <tr>
-                <td colSpan="8" className="text-center py-4">
-                  No cars available.{" "}
-                  <Link to="/add-car">
-                    <button className="btn btn-primary">Add Car</button>
+                <td colSpan="8" className="text-center py-4 text-primary font-bold">
+                You Add  No Cars .{" "}
+                <br />
+                  <Link to="/add-car mt-1">
+                    <button className="btn btn-primary">Add Car Now</button>
                   </Link>
                 </td>
               </tr>
