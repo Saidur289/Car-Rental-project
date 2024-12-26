@@ -2,7 +2,8 @@ import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
+
 
 const Register = () => {
     const [show, setShow] = useState(false)

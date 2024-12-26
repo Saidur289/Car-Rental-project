@@ -3,7 +3,8 @@ import { FaGoogle } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthProvider";
 import Swal from "sweetalert2";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
+
 
 
 const Login = () => {
@@ -25,7 +26,7 @@ const Login = () => {
       navigate(from)
     })
     .catch((error) => {
-      toast.error(error.message)
+      toast.error('Login error' ,error.message)
     })
   
    }
@@ -33,7 +34,7 @@ const Login = () => {
    const handleGoogle = () => {
     handleLoginGoogle()
     .then((result) => {
-      toast('user successfully sign in')
+      toast.success('user successfully sign in')
       navigate(from)
     })
     .catch((error) => {
