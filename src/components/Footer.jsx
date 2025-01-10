@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from '../assets/images/icons8-car-100.png'
+import { Link } from 'react-router-dom';
 const Footer = () => {
     return (
         <footer className="bg-gradient-to-r from-blue-900 via-purple-800 to-blue-900 text-white py-8">
@@ -28,8 +29,8 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Additional Links</h3>
             <ul className="space-y-2">
-              <li>Booking</li>
-              <li>Coming Soon</li>
+              <li><Link to = '/'></Link>Booking</li>
+              <li><Link to = '/available'></Link>Available Car</li>
               <li>Good Support</li>
               <li>Reviews</li>
               <li>News</li>

@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 
 const ListView = ({cars}) => {
     return (
-        <div className="overflow-x-auto py-8">
+        <div className="overflow-x-auto border-2">
         <table className="table">
           {/* head */}
           <thead>
-            <tr>
+            <tr className="font-bold">
               <th>Car Image</th>
               <th>Car Model</th>
               <th>Daily Rent Price</th>
@@ -21,7 +21,7 @@ const ListView = ({cars}) => {
             {/* row 3 */}
             {cars && (
               cars.map((car) => (
-                <tr key={car._id}>
+                <tr key={car._id} className="hover">
                   <td>
                     <div className="flex items-center gap-3">
                       <div className="avatar">
@@ -44,8 +44,8 @@ const ListView = ({cars}) => {
                     <p
                       className={
                         car?.availability === "Available"
-                          ? "text-green-600 bg-green-100/60 px-4 py-2 text-left rounded-xl"
-                          : "text-purple-600 bg-purple-100/60 px-4 py-2 text-left rounded-xl"
+                          ? "text-green-400 bg-green-100/60 px-4 py-2 text-left rounded-xl"
+                          : "text-purple-400 bg-purple-100/60 px-4 py-2 text-left rounded-xl"
                       }
                     >
                       {car?.availability}

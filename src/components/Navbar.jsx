@@ -26,6 +26,7 @@ const Navbar = () => {
       <li>
         <NavLink to="/available">Available Cars</NavLink>
       </li>
+      
       {user && 
         
           <li>
@@ -47,10 +48,10 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="navbar bg-base-100 z-50 relative">
-      <div className="navbar-start">
+    <div className="navbar bg-gradient-to-r from-indigo-500 to-purple-400  text-white fixed container mx-auto backdrop:blur-lg   z-50 top-0 pl-0">
+      <div className="navbar-start ">
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+          <div tabIndex={0} role="button" className="lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"
@@ -68,7 +69,7 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content bg-base-100 text-black rounded-box  mt-3 w-52 p-2 shadow z-50"
           >
             {links}
           </ul>
@@ -106,14 +107,14 @@ const Navbar = () => {
       {/* Log Out Button */}
       <button
         onClick={handleLogOut}
-        className="btn bg-gradient-to-r from-blue-700 to-purple-800 text-white hover:from-blue-500 hover:to-purple-600"
+        className="px-5 py-3 rounded-lg border-none bg-gradient-to-r from-blue-700 to-purple-800 text-white hover:from-blue-500 hover:to-purple-600"
       >
         Log Out
       </button>
     </div>
   ) : (
     <Link to="/login">
-      <button className="btn bg-indigo-400 hover:bg-indigo-500 text-white">
+      <button className="px-5 py-3 rounded-lg border-none bg-gradient-to-r from-blue-700 to-purple-800 text-white hover:from-blue-500 hover:to-purple-600">
         Login
       </button>
     </Link>

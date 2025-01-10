@@ -266,7 +266,7 @@ const MyCarsPage = () => {
     //   )}
     // </div>
     <div
-      className={`container mx-auto ${
+      className={`container mx-auto bg-gradient-to-r from-indigo-50 to-purple-100 ${
         openModal ? "backdrop-blur-lg bg-gray-400" : ""
       }`}
     >

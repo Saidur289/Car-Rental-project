@@ -54,7 +54,7 @@ const AddCarPage = () => {
   };
 
   return (
-    <div>
+    <div className="bg-gradient-to-r from-indigo-50 to-purple-100">
       <form onSubmit={handleSubmit} className="card-body">
         {/* title */}
         <div className="form-control">

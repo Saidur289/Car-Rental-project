@@ -4,7 +4,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 // import required modules
-import { Autoplay, Navigation, Pagination, EffectFade } from "swiper/modules";
+import { Autoplay, Pagination, EffectFade } from "swiper/modules";
 import Slider from "./Slider";
 import { Fade } from "react-awesome-reveal";
 // import { useEffect } from 'react';
@@ -51,7 +51,8 @@ const slideData = [
 ];
 export default function Carousel() {
   return (
-    <div className="container mx-auto px-10 py-10 bg-gradient-to-r from-indigo-500 to-purple-400">
+    <div  className="container mx-auto px-5 py-20 bg-gradient-to-r from-indigo-500 to-purple-400 ">
+      <h1 className="text-white font-bold text-3xl text-center pb-5">Customer Review</h1>
       <Swiper
         slidesPerView={3}
         spaceBetween={50}
@@ -90,8 +91,8 @@ export default function Carousel() {
         pagination={{
           clickable: true,
         }}
-        navigation={true}
-        modules={[Pagination, Autoplay, Navigation, EffectFade]}
+        
+        modules={[Pagination, Autoplay, EffectFade]}
         className="mySwiper"
       >
         <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 p-4">

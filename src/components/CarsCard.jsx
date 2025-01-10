@@ -11,37 +11,34 @@ const CarsCard = ({ car }) => {
   let result = differenceInDays(new Date(date), new Date(datePosted));
   return (
     <Fade cascade>
-      <div className="card card-compact bg-base-100  shadow-xl hover:scale-105 hover:shadow-md hover:shadow-indigo-400 overflow-hidden">
-      <figure className="h-[300px]">
+      <div className="card card-compact bg-base-100 md:min-w-96  shadow-xl hover:scale-105 hover:shadow-md hover:shadow-indigo-400 overflow-hidden">
+      <figure className="h-[250px]">
         <img
           src={image}
           alt="cars pic"
           className="w-full object-cover h-full"
         />
       </figure>
-      <div className="card-body space-y-2 ">
-        <h2 className="card-title text-primary text-2xl">{model}</h2>
-        <p className="text-secondary text-xl">{description.substring(0, 80)}</p>
-        <p className="font-semibold flex items-center gap-1 text-xl">
+      <div className="pl-2  space-y-2 ">
+        <h2 className="card-title text-primary text-xl">{model}</h2>
+        <p className="text-secondary text-sm">{description.substring(0, 60)}...</p>
+        <p className="font-semibold flex items-center gap-1 text-sm">
           <FaSackDollar />
-          Daily Price:{dailyPrice}
-        </p>
-        <p className="font-semibold flex items-center gap-1 text-xl">
-          <FaLocationDot /> Location: {location}
+          {dailyPrice}$ per day
         </p>
         <div className="flex gap-1 items-center">
-        Availability: {availability === 'Available'? <div className="badge badge-secondary badge-outline">Available</div>: <p>Not Available</p>
+         {availability === 'Available'? <div className="badge badge-secondary badge-outline">Available</div>: <p>Not Available</p>
 
 }
         </div>
-        <p className="font-semibold flex items-center gap-1 text-xl">
+        <p className="font-semibold flex items-center gap-1 text-sm">
           {" "}
           <MdUpdate />
-          {result === 0 ? "Date Posted: Added a few times ago." : `Date Posted: Added ${result} days ago.`}
+          {result === 0 ? "Added a few times ago." : `Added ${result} days ago.`}
 
          
         </p>
-        <p className="font-semibold flex items-center gap-1 text-xl">
+        <p className="font-semibold flex items-center gap-1 text-sm">
           {" "}
           
           Total Booking: {bookingCount} .

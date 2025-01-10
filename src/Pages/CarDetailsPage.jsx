@@ -46,14 +46,14 @@ const CarDetailsPage = () => {
         <img
           src={image}
           alt="Car Model"
-          className="w-full md:h-[400px] rounded-lg object-cover"
+          className="w-full md:h-[450px] rounded-lg object-cover"
         />
       </div>
 
       {/* Right: Details */}
       <div className="flex-1">
-        <h2 className="text-2xl font-bold mb-4">{model}</h2>
-        <h2 className="text-2xl font-bold mb-4">{location}</h2>
+        <h2 className="text-2xl font-bold mb-3">{model}</h2>
+        <h2 className="text-2xl font-bold mb-3">{location}</h2>
 
         <div className="flex items-center mb-2">
           <FaDollarSign className="text-blue-500 mr-2" />

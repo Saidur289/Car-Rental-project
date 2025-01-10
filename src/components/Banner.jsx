@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 const Banner = () => {
   return (
-  <div className="min-h-screen">
-  <div className=" relative bg-bg-banner bg-cover bg-center bg-no-repeat h-[500px] md:h-screen object-cover flex flex-col items-center justify-center">
+  <div className="">
+  <div className=" relative bg-bg-banner bg-cover bg-center bg-no-repeat h-[500px] md:h-[80vh] object-cover flex flex-col items-center justify-center">
       <div className="absolute inset-0 bg-black opacity-60 "></div>
       {/* Content on top of overlay */}
       <div className="relative z-10 flex  items-center justify-center h-full ">

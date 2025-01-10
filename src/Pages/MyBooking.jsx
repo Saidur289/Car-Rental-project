@@ -70,7 +70,7 @@ const MyBooking = () => {
     /* <button onClick={() => toast.dismiss(t.id)}>Dismiss</button> */
   }
   return (
-    <div className="overflow-x-auto py-8">
+    <div className="overflow-x-auto py-8 bg-gradient-to-r from-indigo-50 to-purple-100">
       <table className="table w-full">
         {/* Table Head */}
         <thead className="bg-gray-100">

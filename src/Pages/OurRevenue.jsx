@@ -13,7 +13,7 @@ const OurRevenue = ({cars}) => {
                         <XAxis dataKey="model" />
                         <YAxis />
                         <Tooltip />
-                        <Bar dataKey="dailyPrice" fill="#8884d8" />
+                        <Bar dataKey="dailyPrice" fill="#800080" />
                     </BarChart>
                 </ResponsiveContainer>
             </div>

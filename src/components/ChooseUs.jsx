@@ -4,10 +4,10 @@ import { FaCar, FaDollarSign, FaHeadset, FaMousePointer } from 'react-icons/fa';
 
 const ChooseUs = () => {
     return (
-        <section className="bg-gradient-to-r from-indigo-500 to-purple-400 py-12">
+        <section className="bg-gradient-to-r from-indigo-500 to-purple-400 pb-12">
       <div className="max-w-6xl mx-auto px-4 lg:px-8">
       <Fade duration={10}>
-      <h2 className="text-white text-3xl font-bold text-center mb-8">Why Choose Us</h2>
+      <h2 className="text-white text-3xl font-bold text-center  py-8">Why Choose Us</h2>
       </Fade>
         <Fade cascade delay={100}>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

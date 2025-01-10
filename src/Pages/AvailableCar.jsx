@@ -28,10 +28,11 @@ const handleList = e => {
 }
 
   return (
-    <div>
-      <div className="py-6 w-3/5 mx-auto flex flex-col space-y-5">
-        <label className="input input-bordered flex items-center gap-2 ">
-          <input type="text" className="grow" placeholder="Search" onChange={(e) =>setFilter(e.target.value)} />
+    <div className="bg-gradient-to-r from-indigo-50 to-purple-100 container mx-auto">
+      <div className="space-y-3 text-center md:py-6 md:flex md:justify-evenly  md:items-center  md:border-2">
+       <div className="md:pt-3">
+       <label className="input input-bordered flex items-center gap-2 ">
+          <input type="text" className="grow" placeholder="Search By Location" onChange={(e) =>setFilter(e.target.value)} />
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"
@@ -45,22 +46,27 @@ const handleList = e => {
             />
           </svg>
         </label>
-        <div role="tablist" className="tabs tabs-boxed pt-3">
+       </div>
+      <div>
+      <div role="tablist" className="tabs tabs-boxed pt-3">
           <a role="tab"className={`tab ${view === true? 'tab-active': ''}`} onClick={handleGrid}>
-            Grid View
+            Grid
           </a>
           <a role="tab" className={`tab ${view === false? 'tab-active': ''}`} onClick={handleList}>
-            List View
+            List
           </a>
         </div>
-        <div className="flex items-center justify-center gap-4">
+      </div>
+        <div className="flex items-center justify-center gap-10">
         <button onClick={() => setPrice('dsc')} className="btn btn-wide  text-primary ">Sort By Higher Price</button>
         <button onClick={() => setPrice('asc')} className="btn btn-wide   text-primary ">Sort By Lower Price</button>
         </div>
       </div>
+      <div className="py-4 md:pb-8 md:pt-5">
       {
         !view? <ListView cars = {cars}></ListView> : <GridVew cars={cars}></GridVew>
       }
+      </div>
        
        
     </div>
