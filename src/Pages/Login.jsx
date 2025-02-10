@@ -42,11 +42,11 @@ const Login = () => {
     })
   }
     return (
-        <div className="bg-gradient-to-r from-indigo-600 to-purple-500 flex justify-center items-center md:py-10">
-        <div className="card bg-base-100 w-full max-w-lg shrink-0 rounded-none shadow-lg p-10">
+        <div className="bg-gradient-to-r from-indigo-600 to-purple-500 flex justify-center items-center md:py-10 min-h-screen">
+        <div className="card bg-base-100 w-full max-w-lg shrink-0 rounded-none shadow-lg p-10 border-2 border-purple-200">
            <h1 className="font-semibold text-center text-primary">Login Your Account</h1>
-         <form onSubmit={handleLogin}  className="card-body">
-           <div className="form-control">
+         <form onSubmit={handleLogin}  className="card-body ">
+           <div className="form-control ">
              <label className="label">
                <span className="label-text">Email</span>
              </label>
