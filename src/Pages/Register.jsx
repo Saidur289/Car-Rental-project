@@ -10,6 +10,7 @@ const Register = () => {
     const { handleSignUp, updateUser, handleLoginGoogle}  = useContext(AuthContext)
     const navigate = useNavigate()
     const location = useLocation()
+    // declare function for submit form 
     const handleSubmit = e => {
         e.preventDefault()
         const name = e.target.name.value 

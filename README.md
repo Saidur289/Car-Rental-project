@@ -40,6 +40,5 @@ This project is a **Car Rental Website** where users can easily book rental cars
 ## 🛠 Installation & Setup  
 Follow these steps to run the project locally:  
 
-1️⃣ Clone the repository:  
-```sh
-git clone https://github.com/your-username/car-rental-project.git
+1️⃣ Clone the repository 
+
