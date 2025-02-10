@@ -48,7 +48,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="navbar bg-gradient-to-r from-indigo-500 to-purple-400  text-white fixed container mx-auto backdrop:blur-lg   z-50 top-0 pl-0">
+    <div className="navbar bg-gradient-to-r from-indigo-500 to-purple-400  text-white fixed container mx-auto backdrop:blur-lg px-3   z-50 top-0 pl-0">
       <div className="navbar-start ">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="lg:hidden">

@@ -14,7 +14,7 @@ const Discount = () => {
         </h1>
         <Link to="/available">
           {" "}
-          <button className="bg-indigo-500 text-white rounded-xl outline-none px-5 py-2 hover:bg-transparent ">
+          <button className="bg-gradient-to-r from-indigo-500 to-purple-400  text-white rounded-xl outline-none px-5 py-2 hover:bg-transparent ">
             Learn More
           </button>
         </Link>
