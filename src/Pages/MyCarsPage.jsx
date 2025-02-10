@@ -266,9 +266,9 @@ const MyCarsPage = () => {
     //   )}
     // </div>
     <div
-      className={`container mx-auto bg-gradient-to-r from-indigo-50 to-purple-100 ${
+      className={`container mx-auto  ${
         openModal ? "backdrop-blur-lg bg-gray-400" : ""
-      }`}
+      } bg-gradient-to-r from-indigo-50 to-purple-100`}
     >
       <div className="text-center py-4 flex flex-col sm:flex-row sm:justify-center gap-4">
         <details className="dropdown">

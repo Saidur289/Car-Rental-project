@@ -12,29 +12,34 @@ const CarsCard = ({ car }) => {
   return (
     <Fade cascade>
       <div className="card card-compact bg-base-100 md:min-w-96  shadow-xl hover:scale-105 hover:shadow-md hover:shadow-indigo-400 overflow-hidden">
-      <figure className="h-[250px]">
+      <figure className="h-[250px] relative">
         <img
           src={image}
           alt="cars pic"
           className="w-full object-cover h-full"
         />
+         <div className="flex gap-1 items-center absolute right-0 top-0 ml-4 mt-4">
+         {availability === 'Available' && <div className="badge  badge-outline bg-blue-800 text-white p-1">Available</div>
+
+}
+        </div>
       </figure>
       <div className="pl-2  space-y-2 ">
         <h2 className="card-title text-primary text-xl">{model}</h2>
         <p className="text-secondary text-sm">{description.substring(0, 60)}...</p>
         <p className="font-semibold flex items-center gap-1 text-sm">
           <FaSackDollar />
-          {dailyPrice}$ per day
+         Daily Price: {dailyPrice}$ per day
         </p>
-        <div className="flex gap-1 items-center">
+        {/* <div className="flex gap-1 items-center">
          {availability === 'Available'? <div className="badge badge-secondary badge-outline">Available</div>: <p>Not Available</p>
 
 }
-        </div>
+        </div> */}
         <p className="font-semibold flex items-center gap-1 text-sm">
           {" "}
           <MdUpdate />
-          {result === 0 ? "Added a few times ago." : `Added ${result} days ago.`}
+          {result === 0 ? "Posted Date:  Added a few times ago." : `Posted Date: Added ${result} days ago.`}
 
          
         </p>
