@@ -14,12 +14,9 @@ const Modals = ({ car, closeModal, user }) => {
     
   const {
     model,
-    location,
     dailyPrice,
     datePosted,
-    description,
     availability,
-    features,
     owner,
     status,
     image,
@@ -59,6 +56,7 @@ const Modals = ({ car, closeModal, user }) => {
      if(owner?.email === user?.email){
       return toast.error('Access Denied')
      }
+     if(!user) return navigate('/login')
     try {
       const { data } = await axios.post(
         `https://car-rental-server-alpha.vercel.app/add-booking`,
