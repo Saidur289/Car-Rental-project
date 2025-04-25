@@ -9,7 +9,7 @@ const Footer = () => {
           <div>
             <h2 className="text-2xl font-bold"><img src={logo} alt="" /></h2>
             <p className="mt-4 text-sm">
-              Copyright &copy; 2024 Car Rent All Rights Reserved
+              Copyright &copy; 2024 Car Rental All Rights Reserved
             </p>
           </div>
   
