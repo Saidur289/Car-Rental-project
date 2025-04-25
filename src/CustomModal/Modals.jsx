@@ -23,6 +23,7 @@ const Modals = ({ car, closeModal, user }) => {
      _id
   } = car || {};
   const [startDate, setStartDate] = useState(new Date(datePosted));
+  // function for submit form 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
