@@ -8,6 +8,7 @@ const CarsCard = ({ car }) => {
   const { image, description, dailyPrice, model, location, datePosted, availability , bookingCount} =
     car || {};
   const date = format(new Date(), "yyyy/MM/dd");
+  // variable for difference between date
   let result = differenceInDays(new Date(date), new Date(datePosted));
   return (
     <Fade cascade>
