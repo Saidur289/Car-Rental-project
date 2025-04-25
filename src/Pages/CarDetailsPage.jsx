@@ -9,9 +9,11 @@ import { format } from "date-fns";
 const CarDetailsPage = () => {
     const {user} = useContext(AuthContext)
     const [openModal, setModalOpen] = useState(false);
+    // function for open modal 
     const handleModalOpen = () => {
       setModalOpen(true);
     };
+    // function for close  modal 
     const closeModal = () => {
       setModalOpen(false);
     };
