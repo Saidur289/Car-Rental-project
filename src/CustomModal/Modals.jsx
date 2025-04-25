@@ -49,7 +49,7 @@ const Modals = ({ car, closeModal, user }) => {
      if(availability !== 'Available'){
         return Swal.fire('This car is not available now')
      }
-    //  date validation
+    //  date validation for user cannot book past date 
      if(compareAsc(new Date(), new Date(bookingDate)) === 1) {
         return Swal.fire('You Cannot booking before posted date')
      }
