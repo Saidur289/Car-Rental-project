@@ -51,6 +51,7 @@ const Register = () => {
         })
        
     }
+    // function for google login 
     const handleGoogle = () => {
       handleLoginGoogle()
       .then((result) => {
