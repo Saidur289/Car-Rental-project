@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import pic from '../assets/images/download.jpg'
 
 const ErrorPage = () => {
+    // some style for error page
     return (
         <div className="min-h-screen flex justify-center items-center border-4 shadow-sm">
            <div className="flex gap-1">
